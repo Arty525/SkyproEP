@@ -1,22 +1,5 @@
-def spliting_number(num: str, num_list: list = [], start: int = 0, stop: int = 4) -> list:
-    '''
-    :param num: номер карты из main.py
-    :param num_list: номер карты, разделенный на подстроки по 4 символа
-    :param start: начальная позиция среза номера карты
-    :param stop: конечная позиция среза номера карты
-
-    Функция принимает на вход номер карты, делит его на подстроки по 4 символа и записывает в список,
-    затем возвращает список. Функция рекурсивная.
-    '''
-    num_list.append(num[start:stop])
-    if stop == len(num):
-        return num_list
-    else:
-        return spliting_number(num, num_list, stop, stop + 4)
-
-
 def get_mask_card_number(num: str) -> str:
-    '''
+    """
     :param num: номер карты из main.py
     Функция принимает на вход номер карты и возвращает ее маску.
     Номер карты замаскирован и отображается в формате XXXX XX** **** XXXX
@@ -26,15 +9,12 @@ def get_mask_card_number(num: str) -> str:
     Пример работы функции:
         7000792289606361 - входной аргумент
         7000 79** **** 6361 - выход функции
-    '''
-    masked_card_number = spliting_number(num)
-    masked_card_number[1] = masked_card_number[1][0:2] + "**"
-    masked_card_number[2] = "****"
-    return " ".join(masked_card_number)
+    """
+    return f"{num[:4]} {num[4:6]}** **** {num[-4:]}"
 
 
 def get_mask_account(num: str) -> str:
-    '''
+    """
     :param num: номер карты из main.py
     Функция принимает на вход номер счета и возвращает его маску.
     Номер счета замаскирован и отображается в формате **XXXX
@@ -43,5 +23,5 @@ def get_mask_account(num: str) -> str:
     Пример работы функции:
         73654108430135874305 - входной аргумент
         **4305 - выход функции
-    '''
+    """
     return "**" + num[-4:]
